@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: demo_postgres
+    environment:
+      POSTGRES_DB: demo_db
+      POSTGRES_USER: user_test1
+      POSTGRES_PASSWORD: pass_test1
+    ports:
+      - "1234:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
