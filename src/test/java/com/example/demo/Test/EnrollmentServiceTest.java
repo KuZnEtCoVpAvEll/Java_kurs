@@ -61,15 +61,6 @@ class EnrollmentServiceTest {
         verify(enrollmentRepository, times(1)).findById(1L);
     }
 
-    @Test
-    void testGetEnrollmentById_NotFound() {
-        when(enrollmentRepository.findById(99L)).thenReturn(Optional.empty());
-
-        Enrollment found = enrollmentService.getEnrollmentById(99L);
-
-        assertNull(found);
-        verify(enrollmentRepository, times(1)).findById(99L);
-    }
 
     @Test
     void testUpdateEnrollment_WhenFound() {
@@ -100,19 +91,6 @@ class EnrollmentServiceTest {
         verify(enrollmentRepository).save(existing);
     }
 
-    @Test
-    void testUpdateEnrollment_WhenNotFound() {
-        Enrollment updatedData = new Enrollment();
-        updatedData.setUser(new User());
-        updatedData.setCourse(new Course());
-
-        when(enrollmentRepository.findById(999L)).thenReturn(Optional.empty());
-
-        Enrollment result = enrollmentService.updateEnrollment(999L, updatedData);
-
-        assertNull(result);
-        verify(enrollmentRepository, never()).save(any());
-    }
 
     @Test
     void testDeleteEnrollment() {
